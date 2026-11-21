@@ -1,5 +1,5 @@
 import {
-  PROJECT_MONTHLY_SPEND, PROJECT_MONTHLY_PROGRESS
+  PROJECT_BUDGET, PROJECT_MONTHLY_SPEND, PROJECT_MONTHLY_PROGRESS
 } from "../data/config.js";
 import { addLog } from "../state/company-state.js";
 import { advanceCalendar, getCurrentPeriod } from "./calendar.js";
@@ -16,7 +16,7 @@ export function startProject(state, projectName) {
     name: projectName.trim() || "Project Genesis",
     status: "In Development",
     progress: 0,
-    allocatedBudget: 250_000,
+    allocatedBudget: PROJECT_BUDGET,
     spent: 0
   };
   addLog(state, `Development began on ${state.project.name}.`, "project");
@@ -29,7 +29,8 @@ export function runMonth(state) {
   const overhead = state.finance.monthlyOverhead;
   const developmentSpend = state.project && state.project.progress < 100 ? PROJECT_MONTHLY_SPEND : 0;
   const expenses = payroll + overhead + developmentSpend;
-  const revenue = 0; // No released game exists yet. Revenue begins with a shipped product.
+  // No released game exists yet. Revenue begins with a shipped product.
+  const revenue = 0;
 
   state.finance.revenueThisMonth = revenue;
   state.finance.expensesThisMonth = expenses;
@@ -53,16 +54,8 @@ export function runMonth(state) {
   ));
   addLog(state, `${period.monthName} ${period.year} closed. Payroll and operating costs: $${expenses.toLocaleString("en-US")}.`, "finance");
 
-  return {
-    period,
-    payroll,
-    overhead,
-    developmentSpend,
-    expenses,
-    revenue,
-    cash: state.finance.cash,
-    bankrupt: state.finance.cash < 0
-  };
+  return { period, payroll, overhead, developmentSpend, expenses, revenue,
+    cash: state.finance.cash, bankrupt: state.finance.cash < 0 };
 }
 
 export function getCurrentPeriodLabel(calendar) {
