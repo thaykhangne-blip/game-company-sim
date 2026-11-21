@@ -45,7 +45,7 @@ export function renderDashboard(state) {
       <div class="progress-track"><span style="width:${project.overallProgress}%"></span></div>
       <div class="project-meta"><span>${project.overallProgress}% overall</span><span>${money(project.spent)} / ${money(project.budget)}</span></div>
       <div class="project-meta"><span>Stage progress</span><b>${project.stageProgress}%</b></div>
-      <div class="assigned-list"><span>TEAM: ${assigned.length ? assigned.map(e=>escapeHTML(e.name)).join(", ") : "No specialists assigned"}</span></div>
+      <div class="assigned-list"><span>TEAM: ${assigned.length ? assigned.map(e=>`<button type="button" class="assigned-chip" data-unassign-project="${project.id}" data-employee-id="${e.id}">${escapeHTML(e.name)} ×</button>`).join("") : "No specialists assigned"}</span></div>
       ${project.stage === "Ready to Release" ? `<button class="secondary release-button" data-release-project="${project.id}">RELEASE GAME</button>` : project.stage === "Released" ? '<span class="released-label">LIVE IN THE MARKET</span>' : `<div class="assign-row"><select data-assign-select="${project.id}" aria-label="Choose project team member"><option value="">Assign a specialist...</option>${available.map(e=>`<option value="${e.id}">${escapeHTML(e.name)} · ${escapeHTML(e.role)}</option>`).join("")}</select><button class="secondary" data-assign-project="${project.id}">ASSIGN</button></div>`}
       ${project.qaScore !== null ? `<div class="project-meta"><span>QA score</span><b>${project.qaScore}/100</b></div>` : ""}
     </section>`;
