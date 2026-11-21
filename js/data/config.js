@@ -8,10 +8,11 @@ export const MONTH_NAMES = [
 ];
 
 export const STARTING_DEPARTMENTS = [
-  { id: "development", name: "Development", headcount: 6, monthlyPayroll: 36_000 },
-  { id: "art", name: "Art & Design", headcount: 3, monthlyPayroll: 18_000 },
-  { id: "audio", name: "Audio", headcount: 1, monthlyPayroll: 6_000 },
-  { id: "publishing", name: "Publishing", headcount: 2, monthlyPayroll: 12_000 }
+  { id: "management", name: "Management", headcount: 1, monthlyPayroll: 0 },
+  { id: "development", name: "Development", headcount: 0, monthlyPayroll: 0 },
+  { id: "art", name: "Art & Design", headcount: 0, monthlyPayroll: 0 },
+  { id: "audio", name: "Audio", headcount: 0, monthlyPayroll: 0 },
+  { id: "publishing", name: "Publishing", headcount: 0, monthlyPayroll: 0 }
 ];
 
 export const PROJECT_BUDGET = 250_000;
