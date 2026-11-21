@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131d"><title>Gacha Studio | Company Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="glow glow-a"></div><div class="glow glow-b"></div>
+<main class="shell">
+<section id="setup" class="screen">
+<header class="topbar"><a class="brand" href="#"><span class="mark">✦</span> GACHA<span>STUDIO</span></a><div class="top-meta"><i></i> COMPANY SIMULATOR <small>PRE-ALPHA 0.1</small></div></header>
+<div class="setup-grid">
+<section class="intro"><div class="eyebrow">✦ &nbsp; YOUR NEXT BIG THING STARTS HERE</div><h1>Build worlds.<br><em>Build legends.</em></h1><p>From a tiny development studio to a global entertainment powerhouse. Create games players love, build worlds they remember, and try not to set the quarterly budget on fire.</p>
+<div class="features"><div><b>◈</b><section><strong>Develop original IPs</strong><small>Turn ambitious concepts into live-service worlds.</small></section></div><div><b>✧</b><section><strong>Master the gacha cycle</strong><small>Characters, banners, updates, and player trust.</small></section></div><div><b>⌁</b><section><strong>Run the whole company</strong><small>People, publishing, money, and reputation.</small></section></div></div>
+<div class="stamp">✦ &nbsp; THE STUDIO IS YOURS<br>&nbsp;&nbsp;&nbsp;&nbsp; MAKE IT MATTER.</div></section>
+<section class="form-panel"><div class="step">01 <span>/</span> COMPANY FOUNDATION</div><h2>Let’s make it official.</h2><p class="muted">Every legendary studio had a day one. This is yours.</p>
+<form id="company-form">
+<label>COMPANY NAME <small>REQUIRED</small><input id="company-name" maxlength="36" placeholder="e.g. Astral Works" required></label>
+<label>FOUNDING YEAR <small>REQUIRED</small><select id="founding-year" required></select></label>
+<label>FOUNDER / CEO <small>REQUIRED</small><input id="ceo-name" maxlength="32" placeholder="e.g. Khang Nguyen" required></label>
+<div id="error" role="alert"></div><button class="primary" type="submit">ESTABLISH COMPANY <b>↗</b></button><div class="footnote">✦ &nbsp; Your journey begins with a single decision.</div>
+</form></section></div>
+<footer class="footer"><span>GACHA STUDIO SIMULATOR</span><span>AN INDUSTRY BUILT ON IMAGINATION.</span><span>© 2026</span></footer>
+</section>
+<section id="dashboard" class="screen hidden">
+<header class="topbar"><a class="brand" href="#"><span class="mark">✦</span> GACHA<span>STUDIO</span></a><div class="dash-actions"><span class="active"><i></i> SIMULATION ACTIVE</span><span id="year-chip"></span><button id="reset">NEW COMPANY ↺</button></div></header>
+<div class="dash-content"><div class="welcome"><div><div class="eyebrow">✦ &nbsp; YOUR COMPANY AT A GLANCE</div><h1 id="dash-name">Company</h1><p id="dash-subtitle"></p></div><div class="seal">✦<small>EST.</small><b id="seal-year"></b></div></div>
+<div class="stats"><article><small>COMPANY VALUE</small><strong>$2.4M</strong><p class="positive">↗ Seed-stage valuation</p></article><article><small>CASH RESERVES</small><strong>$850K</strong><p>Available capital</p></article><article><small>EMPLOYEES</small><strong>12</strong><p>One small, ambitious team</p></article><article><small>REPUTATION</small><strong>10<span>/100</span></strong><p>Unknown, full of potential</p></article></div>
+<div class="lower"><article class="panel"><small class="eyebrow">THE FIRST MILESTONE</small><h2>What will you create?</h2><p>Your studio is officially open. Before you can compete with the giants, you need a game worth believing in.</p><div class="milestone"><b>✦</b><section><strong>Project Genesis</strong><small>Define your first original game IP.</small></section><span>UP NEXT</span></div><button class="disabled" disabled>GAME DEVELOPMENT <small>COMING NEXT</small></button></article>
+<article class="panel profile"><small class="eyebrow">STUDIO PROFILE</small><div><span>Founder &amp; CEO</span><b id="profile-ceo"></b></div><div><span>Established</span><b id="profile-year"></b></div><div><span>Industry</span><b>Gaming &amp; Interactive</b></div><div><span>Business model</span><b>Free-to-play / Live service</b></div><p>A blank canvas. A long road. An unreasonable number of spreadsheets.</p></article></div></div>
+<footer class="footer"><span>GACHA STUDIO SIMULATOR</span><span id="footer-company"></span><span>PRE-ALPHA 0.1</span></footer>
+</section></main><script src="script.js"></script></body></html>
