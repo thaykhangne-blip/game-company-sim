@@ -1,7 +1,6 @@
 export const SAVE_KEY = "gachaStudioSimulation";
 export const STARTING_CASH = 850_000;
 export const STARTING_REPUTATION = 10;
-export const STARTING_HEADCOUNT = 12;
 export const MONTHLY_OVERHEAD = 15_000;
 export const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -16,5 +15,5 @@ export const STARTING_DEPARTMENTS = [
 ];
 
 export const PROJECT_BUDGET = 250_000;
-export const PROJECT_MONTHLY_SPEND = 35_000;
+export const PROJECT_MONTHLY_SPEND = 27_500;
 export const PROJECT_MONTHLY_PROGRESS = 12;
