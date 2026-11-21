@@ -3,7 +3,7 @@ import { runMonth } from "./systems/economy.js";
 import { renderDashboard, showDashboard, showSetup, showLoading } from "./ui/render.js";
 import { HIRABLE_ROLES, getRoleDepartment, getRoleSalary, hireEmployee, fireEmployee } from "./systems/people.js";
 import { purchaseOfficeUpgrade } from "./systems/operations.js";
-import { createProject, assignEmployee, releaseProject } from "./systems/production.js";
+import { createProject, assignEmployee, unassignEmployee, releaseProject } from "./systems/production.js";
 import { upgradeLocation } from "./systems/locations.js";
 
 let state = loadState();
@@ -92,6 +92,12 @@ function handleUpgrade(event) {
 }
 
 function handleProductionAction(event) {
+  const unassignButton = event.target.closest("[data-unassign-project]");
+  if (unassignButton) {
+    unassignEmployee(state, unassignButton.dataset.unassignProject, unassignButton.dataset.employeeId);
+    persistAndRender();
+    return;
+  }
   const assignButton=event.target.closest("[data-assign-project]");
   if(assignButton){
     const projectId=assignButton.dataset.assignProject;
