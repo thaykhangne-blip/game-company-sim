@@ -59,7 +59,7 @@ export function advanceProductionMonth(state) {
     const team = state.employees.filter(employee => project.assignedEmployeeIds.includes(employee.id));
     const devTeam = team.filter(employee => ["development", "art", "audio"].includes(employee.departmentId));
     const capacity = Math.max(0.35, Math.min(1.5, (devTeam.length / 4) * (devTeam.length ? devTeam.reduce((s,e)=>s+e.skill,0) / devTeam.length / 75 : 0.5) * getDevelopmentEfficiency(state)));
-    const monthlySpend = Math.min(project.budget - project.spent, Math.round(project.budget / SCOPES[project.scope].baseMonths));
+    const monthlySpend = Math.min(project.budget - project.spent, Math.round(project.budget / (SCOPES[project.scope].baseMonths * 5)));
     if (monthlySpend <= 0 && project.stage !== "Quality Assurance") continue;
     project.monthsInDevelopment += 1;
     project.spent += monthlySpend;
