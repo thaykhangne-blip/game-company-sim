@@ -2,10 +2,11 @@ import {
   SAVE_KEY, STARTING_CASH, STARTING_REPUTATION,
   STARTING_DEPARTMENTS, MONTHLY_OVERHEAD
 } from "../data/config.js";
+import { createStartingRoster, syncDepartments } from "../systems/people.js";
 
 export function createCompany(setup) {
-  return {
-    version: 1,
+  const state = {
+    version: 2,
     company: { ...setup },
     calendar: { year: setup.foundingYear, month: 1, monthCount: 0 },
     finance: {
@@ -16,9 +17,13 @@ export function createCompany(setup) {
     },
     reputation: STARTING_REPUTATION,
     departments: STARTING_DEPARTMENTS.map(department => ({ ...department })),
+    employees: createStartingRoster(),
+    office: { upgrades: [] },
     project: null,
     log: [{ type: "system", message: "Company established. Your first month begins now." }]
   };
+  syncDepartments(state);
+  return state;
 }
 
 export function saveState(state) {
@@ -36,7 +41,13 @@ export function loadState() {
     const raw = localStorage.getItem(SAVE_KEY);
     if (raw) {
       const state = JSON.parse(raw);
-      if (state?.version === 1 && state.company && state.finance && state.calendar) return state;
+      if (state?.company && state?.finance && state?.calendar) {
+        if (!Array.isArray(state.employees)) state.employees = createStartingRoster();
+        if (!state.office) state.office = { upgrades: [] };
+        state.version = 2;
+        syncDepartments(state);
+        return state;
+      }
     }
 
     // Migrate saves created by the original setup-only prototype.
@@ -67,5 +78,5 @@ export function clearState() {
 
 export function addLog(state, message, type = "system") {
   state.log.unshift({ type, message });
-  state.log = state.log.slice(0, 8);
+  state.log = state.log.slice(0, 12);
 }
