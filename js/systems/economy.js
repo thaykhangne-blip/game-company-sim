@@ -24,7 +24,7 @@ export function startProject(state, projectName) {
 }
 
 export function runMonth(state) {
-  const period = advanceCalendar(state.calendar);
+  const period = getCurrentPeriod(state.calendar);
   const payroll = calculatePayroll(state.departments);
   const overhead = state.finance.monthlyOverhead;
   const developmentSpend = state.project && state.project.progress < 100 ? PROJECT_MONTHLY_SPEND : 0;
@@ -52,7 +52,8 @@ export function runMonth(state) {
   state.finance.companyValue = Math.max(0, Math.round(
     2_400_000 + state.finance.cash * 0.35 + state.reputation * 18_000
   ));
-  addLog(state, `${period.monthName} ${period.year} closed. Payroll and operating costs: $${expenses.toLocaleString("en-US")}.`, "finance");
+  addLog(state, `${period.monthName} ${period.year} closed. Payroll and operating costs: ${expenses.toLocaleString("en-US")}.`, "finance");
+  advanceCalendar(state.calendar);
 
   return { period, payroll, overhead, developmentSpend, expenses, revenue,
     cash: state.finance.cash, bankrupt: state.finance.cash < 0 };
