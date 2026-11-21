@@ -1,4 +1,3 @@
-import { addLog } from "../state/company-state.js";
 
 export const OFFICE_UPGRADES = [
   { id: "workspace", name: "Improved Workspace", description: "Better desks, meeting rooms and collaboration spaces.", cost: 45_000, monthlyCost: 2_000, morale: 5 },
@@ -18,7 +17,7 @@ export function purchaseOfficeUpgrade(state, upgradeId) {
   state.employees.forEach(employee => {
     employee.morale = Math.min(100, employee.morale + upgrade.morale);
   });
-  addLog(state, `${upgrade.name} installed. Cash spent: $${upgrade.cost.toLocaleString("en-US")}.`, "operations");
+  log(state, `${upgrade.name} installed. Cash spent: $${upgrade.cost.toLocaleString("en-US")}.`, "operations");
   return { ok: true, upgrade };
 }
 
@@ -28,4 +27,8 @@ export function applyMonthlyWorkforceEffects(state) {
     if (employee.morale < 100) employee.morale = Math.min(100, employee.morale + 1);
     employee.experience += 1;
   });
+}
+function log(state, message, type = "system") {
+  state.log.unshift({ type, message });
+  state.log = state.log.slice(0, 12);
 }
