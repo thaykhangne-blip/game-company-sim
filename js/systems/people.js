@@ -30,7 +30,8 @@ export const DEPARTMENT_NAMES = {
   development: "Development",
   art: "Art & Design",
   audio: "Audio",
-  publishing: "Publishing"
+  publishing: "Publishing",
+  management: "Management"
 };
 
 const STARTING_ROSTER = [
@@ -102,6 +103,7 @@ export function hireEmployee(state, { name, role, departmentId }) {
 export function fireEmployee(state, employeeId) {
   const index = state.employees.findIndex(employee => employee.id === employeeId);
   if (index < 0) return { ok: false, reason: "Employee not found." };
+  if (state.employees[index].role === "Founder & CEO") return { ok: false, reason: "The founder and CEO cannot be dismissed." };
   if (state.employees.length <= 1) return { ok: false, reason: "A company must retain at least one employee." };
   const [employee] = state.employees.splice(index, 1);
   syncDepartments(state);
