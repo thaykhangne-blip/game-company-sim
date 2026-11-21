@@ -1,0 +1,62 @@
+import {
+  SAVE_KEY, STARTING_CASH, STARTING_REPUTATION,
+  STARTING_DEPARTMENTS, MONTHLY_OVERHEAD
+} from "../data/config.js";
+
+export function createCompany(setup) {
+  return {
+    version: 1,
+    company: { ...setup },
+    calendar: { year: setup.foundingYear, month: 1, monthCount: 0 },
+    finance: {
+      cash: STARTING_CASH,
+      companyValue: 2_400_000,
+      revenueThisMonth: 0,
+      expensesThisMonth: 0,
+      totalRevenue: 0,
+      totalExpenses: 0,
+      monthlyOverhead: MONTHLY_OVERHEAD
+    },
+    reputation: STARTING_REPUTATION,
+    departments: STARTING_DEPARTMENTS.map(department => ({ ...department })),
+    project: null,
+    log: [{ type: "system", message: "Company established. Your first month begins now." }]
+  };
+}
+
+export function saveState(state) {
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+    return true;
+  } catch (error) {
+    console.warn("Could not save simulation state:", error);
+    return false;
+  }
+}
+
+export function loadState() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) {
+      const state = JSON.parse(raw);
+      if (state?.version === 1 && state.company && state.finance && state.calendar) return state;
+    }
+  } catch (error) {
+    console.warn("Could not load simulation state:", error);
+  }
+  return null;
+}
+
+export function clearState() {
+  try {
+    localStorage.removeItem(SAVE_KEY);
+    localStorage.removeItem("gachaStudioCompany");
+  } catch (error) {
+    console.warn("Could not clear saved simulation:", error);
+  }
+}
+
+export function addLog(state, message, type = "system") {
+  state.log.unshift({ type, message });
+  state.log = state.log.slice(0, 8);
+}
