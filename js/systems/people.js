@@ -1,4 +1,3 @@
-import { addLog } from "../state/company-state.js";
 
 const ROLE_PAY = {
   "Software Engineer": 6500,
@@ -96,7 +95,7 @@ export function hireEmployee(state, { name, role, departmentId }) {
   };
   state.employees.push(employee);
   syncDepartments(state);
-  addLog(state, `${cleanName} joined as ${role} in ${department.name}. Monthly salary: $${employee.salary.toLocaleString("en-US")}.`, "people");
+  log(state, `${cleanName} joined as ${role} in ${department.name}. Monthly salary: $${employee.salary.toLocaleString("en-US")}.`, "people");
   return { ok: true, employee };
 }
 
@@ -124,4 +123,8 @@ export function getRoleDepartment(role) {
 
 export function getRoleSalary(role) {
   return ROLE_PAY[role] || 0;
+}
+function log(state, message, type = "system") {
+  state.log.unshift({ type, message });
+  state.log = state.log.slice(0, 12);
 }
