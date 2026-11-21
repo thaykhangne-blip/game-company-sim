@@ -5,11 +5,13 @@
 <meta name="theme-color" content="#10131d"><title>Gacha Studio | Company Simulator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="glow glow-a"></div><div class="glow glow-b"></div>
 <main class="shell">
+<section id="loading-screen" class="loading-screen hidden" aria-live="polite"><div class="loading-mark">✦</div><div class="loading-title">SETTING UP YOUR STUDIO</div><p id="loading-message">Preparing your company headquarters...</p><div class="loading-track"><span></span></div></section>
 <section id="setup" class="screen">
 <header class="topbar"><a class="brand" href="#"><span class="mark">✦</span> GACHA<span>STUDIO</span></a><div class="top-meta"><i></i> COMPANY SIMULATOR <small>PRE-ALPHA 0.2</small></div></header>
 <div class="setup-grid">
@@ -42,13 +44,19 @@
 </div>
 <div class="lower">
 <article class="panel"><small class="eyebrow">GAME DEVELOPMENT</small><h2>Project pipeline</h2><div id="project-panel"><p class="empty-project">No active project. Your development team is waiting for a direction.</p></div>
-<div class="project-create"><input id="project-name" maxlength="40" placeholder="Name your first game project"><button id="start-project" class="secondary">START PROJECT</button></div></article>
+<form id="project-create-form" class="project-create">
+<input id="project-name" maxlength="40" placeholder="Name your game project" required>
+<select id="project-genre" aria-label="Game genre"><option>Action RPG</option><option>Turn-Based RPG</option><option>Strategy</option><option>Simulation</option><option>Platformer</option><option>Visual Novel</option></select>
+<select id="project-platform" aria-label="Target platform"><option>PC</option><option>Mobile</option><option>Console</option></select>
+<select id="project-scope" aria-label="Project scope"><option value="small">Small scope</option><option value="medium">Medium scope</option><option value="large">Large scope</option></select>
+<button id="start-project" class="secondary" type="submit">CREATE GAME</button></form></article>
 <article class="panel profile"><small class="eyebrow">STUDIO PROFILE</small><div><span>Founder &amp; CEO</span><b id="profile-ceo"></b></div><div><span>Established</span><b id="profile-year"></b></div><div><span>Industry</span><b>Gaming &amp; Interactive</b></div><div><span>Business model</span><b>Free-to-play / Live service</b></div><p>A blank canvas. A long road. An unreasonable number of spreadsheets.</p></article>
 </div>
 <div class="lower detail-grid">
 <article class="panel"><small class="eyebrow">ORGANIZATION</small><h2>Departments</h2><div id="department-list" class="department-list"></div></article>
 <article class="panel"><small class="eyebrow">FINANCIAL SNAPSHOT</small><h2>Monthly operations</h2><div class="finance-row"><span>Monthly revenue</span><b id="stat-revenue">$0</b></div><div class="finance-row"><span>Monthly expenses</span><b id="stat-expenses">$0</b></div><div class="finance-row"><span>Payroll</span><b id="stat-payroll">$0</b></div><div class="finance-row"><span>Office &amp; overhead</span><b id="stat-overhead">$0</b></div></article>
 </div>
+<div class="lower location-grid"><article class="panel"><small class="eyebrow">HEADQUARTERS</small><h2>Company location</h2><div id="location-panel"></div></article></div>
 <div class="lower people-grid">
 <article class="panel"><small class="eyebrow">HUMAN RESOURCES</small><h2>People &amp; talent</h2><p class="panel-copy">Hire specialists to grow your studio. Salaries are charged every month.</p>
 <form id="hire-form" class="hire-form">
