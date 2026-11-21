@@ -2,7 +2,7 @@ import { createCompany, loadState, saveState, clearState, addLog } from "./state
 import { runMonth, startProject } from "./systems/economy.js";
 import { renderDashboard, showDashboard, showSetup } from "./ui/render.js";
 import { HIRABLE_ROLES, getRoleDepartment, getRoleSalary, hireEmployee, fireEmployee } from "./systems/people.js";
-import { OFFICE_UPGRADES, purchaseOfficeUpgrade } from "./systems/operations.js";
+import { purchaseOfficeUpgrade } from "./systems/operations.js";
 
 let state = loadState();
 
