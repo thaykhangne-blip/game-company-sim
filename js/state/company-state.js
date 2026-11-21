@@ -6,7 +6,7 @@ import { createStartingRoster, syncDepartments } from "../systems/people.js";
 
 export function createCompany(setup) {
   const state = {
-    version: 2,
+    version: 3,
     company: { ...setup },
     calendar: { year: setup.foundingYear, month: 1, monthCount: 0 },
     finance: {
@@ -17,10 +17,12 @@ export function createCompany(setup) {
     },
     reputation: STARTING_REPUTATION,
     departments: STARTING_DEPARTMENTS.map(department => ({ ...department })),
-    employees: createStartingRoster(),
+    employees: [{ id: "ceo-founder", name: setup.ceoName, role: "Founder & CEO", departmentId: "management", salary: 0, skill: 65, morale: 85, experience: 0 }],
     office: { upgrades: [] },
+    location: { id: "home", name: "Home Office", monthlyCost: 0, capacity: 3 },
+    projects: [],
     project: null,
-    log: [{ type: "system", message: "Company established. Your first month begins now." }]
+    log: [{ type: "system", message: "Company established. The founder is the only employee. Operations begin from a home office." }]
   };
   syncDepartments(state);
   return state;
@@ -42,9 +44,11 @@ export function loadState() {
     if (raw) {
       const state = JSON.parse(raw);
       if (state?.company && state?.finance && state?.calendar) {
-        if (!Array.isArray(state.employees)) state.employees = createStartingRoster();
+        if (!Array.isArray(state.employees)) state.employees = [{ id: "ceo-founder", name: state.company.ceoName, role: "Founder & CEO", departmentId: "management", salary: 0, skill: 65, morale: 85, experience: 0 }];
         if (!state.office) state.office = { upgrades: [] };
-        state.version = 2;
+        if (!state.location) state.location = { id: "home", name: "Home Office", monthlyCost: 0, capacity: 3 };
+        if (!Array.isArray(state.projects)) state.projects = state.project ? [{ id: "legacy-project", name: state.project.name || "Legacy Project", genre: "Action RPG", platform: "PC", scope: "medium", stage: state.project.progress >= 100 ? "Ready to Release" : "Production", stageProgress: state.project.progress || 0, overallProgress: state.project.progress || 0, budget: state.project.allocatedBudget || 220000, spent: state.project.spent || 0, quality: 50, assignedEmployeeIds: state.employees.filter(e => e.departmentId === "development").map(e => e.id), monthsInDevelopment: 0, qaScore: null }] : [];
+        state.version = 3;
         syncDepartments(state);
         return state;
       }
