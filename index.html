@@ -49,6 +49,19 @@
 <article class="panel"><small class="eyebrow">ORGANIZATION</small><h2>Departments</h2><div id="department-list" class="department-list"></div></article>
 <article class="panel"><small class="eyebrow">FINANCIAL SNAPSHOT</small><h2>Monthly operations</h2><div class="finance-row"><span>Monthly revenue</span><b id="stat-revenue">$0</b></div><div class="finance-row"><span>Monthly expenses</span><b id="stat-expenses">$0</b></div><div class="finance-row"><span>Payroll</span><b id="stat-payroll">$0</b></div><div class="finance-row"><span>Office &amp; overhead</span><b id="stat-overhead">$0</b></div></article>
 </div>
+<div class="lower people-grid">
+<article class="panel"><small class="eyebrow">HUMAN RESOURCES</small><h2>People &amp; talent</h2><p class="panel-copy">Hire specialists to grow your studio. Salaries are charged every month.</p>
+<form id="hire-form" class="hire-form">
+<input id="hire-name" maxlength="32" placeholder="Employee full name" required>
+<select id="hire-role" required aria-label="Employee role"></select>
+<select id="hire-department" required aria-label="Department">
+<option value="development">Development</option><option value="art">Art &amp; Design</option><option value="audio">Audio</option><option value="publishing">Publishing</option>
+</select>
+<button id="hire-submit" class="secondary" type="submit">HIRE EMPLOYEE</button>
+</form><div id="hire-error" class="inline-error" role="alert"></div><div id="employee-list" class="employee-list"></div>
+</article>
+<article class="panel"><small class="eyebrow">WORKPLACE</small><h2>Office upgrades</h2><p class="panel-copy">Invest in the studio environment to improve employee morale. Upgrades add recurring monthly costs.</p><div id="office-upgrades" class="office-upgrades"></div></article>
+</div>
 <article class="panel activity-panel"><small class="eyebrow">COMPANY JOURNAL</small><h2>Recent activity</h2><ul id="activity-log" class="activity-log"></ul></article>
 </div>
 <footer class="footer"><span>GACHA STUDIO SIMULATOR</span><span id="footer-company"></span><span>PRE-ALPHA 0.2</span></footer>
