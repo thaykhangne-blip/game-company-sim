@@ -105,7 +105,7 @@ export function fireEmployee(state, employeeId) {
   if (state.employees.length <= 1) return { ok: false, reason: "A company must retain at least one employee." };
   const [employee] = state.employees.splice(index, 1);
   syncDepartments(state);
-  addLog(state, `${employee.name} (${employee.role}) left the company. Payroll reduced by $${employee.salary.toLocaleString("en-US")}/month.`, "people");
+  log(state, `${employee.name} (${employee.role}) left the company. Payroll reduced by ${employee.salary.toLocaleString("en-US")}/month.`, "people");
   return { ok: true, employee };
 }
 
