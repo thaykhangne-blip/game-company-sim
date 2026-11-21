@@ -85,6 +85,7 @@ export function hireEmployee(state, { name, role, departmentId }) {
   if (!department || ROLE_DEPARTMENT[role] !== departmentId) {
     return { ok: false, reason: "That role does not belong to the selected department." };
   }
+  if (state.location && state.employees.length >= state.location.capacity) return { ok: false, reason: "Your current premises are at capacity. Upgrade your location before hiring." };
   if (state.employees.some(employee => employee.name.toLowerCase() === cleanName.toLowerCase())) {
     return { ok: false, reason: "An employee with that name already exists." };
   }
