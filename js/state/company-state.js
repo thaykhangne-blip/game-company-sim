@@ -2,7 +2,7 @@ import {
   SAVE_KEY, STARTING_CASH, STARTING_REPUTATION,
   STARTING_DEPARTMENTS, MONTHLY_OVERHEAD
 } from "../data/config.js";
-import { createStartingRoster, syncDepartments } from "../systems/people.js";
+import { syncDepartments } from "../systems/people.js";
 
 export function createCompany(setup) {
   const state = {
