@@ -58,6 +58,10 @@ export function advanceProductionMonth(state) {
   for (const project of active) {
     const team = state.employees.filter(employee => project.assignedEmployeeIds.includes(employee.id));
     const devTeam = team.filter(employee => ["development", "art", "audio"].includes(employee.departmentId));
+    if (!devTeam.length) {
+      log(state, `${project.name} is stalled. Assign a development, art or audio specialist to continue.`, "warning");
+      continue;
+    }
     const capacity = Math.max(0.35, Math.min(1.5, (devTeam.length / 4) * (devTeam.length ? devTeam.reduce((s,e)=>s+e.skill,0) / devTeam.length / 75 : 0.5) * getDevelopmentEfficiency(state)));
     const monthlySpend = Math.min(project.budget - project.spent, Math.round(project.budget / (SCOPES[project.scope].baseMonths * 5)));
     project.monthsInDevelopment += 1;
