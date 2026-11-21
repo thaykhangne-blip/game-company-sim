@@ -36,7 +36,7 @@ export function assignEmployee(state, projectId, employeeId) {
   const project = state.projects.find(item => item.id === projectId);
   const employee = state.employees.find(item => item.id === employeeId);
   if (!project || !employee) return { ok: false, reason: "Project or employee not found." };
-  if (project.stage === "Released") return { ok: false, reason: "Released projects cannot be reassigned." };
+  if (["Ready to Release", "Released"].includes(project.stage)) return { ok: false, reason: "Projects in QA-complete or released status cannot be reassigned." };
   const assignedElsewhere = state.projects.some(item => item.id !== projectId && item.stage !== "Released" && item.assignedEmployeeIds.includes(employeeId));
   if (assignedElsewhere) return { ok: false, reason: "That employee is already assigned to another active project." };
   if (project.assignedEmployeeIds.includes(employeeId)) return { ok: false, reason: "That employee is already on this project." };
@@ -53,7 +53,7 @@ export function unassignEmployee(state, projectId, employeeId) {
 }
 
 export function advanceProductionMonth(state) {
-  const active = state.projects.filter(project => project.stage !== "Released");
+  const active = state.projects.filter(project => !["Ready to Release", "Released"].includes(project.stage));
   const results = [];
   for (const project of active) {
     const team = state.employees.filter(employee => project.assignedEmployeeIds.includes(employee.id));
