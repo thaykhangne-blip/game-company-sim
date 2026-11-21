@@ -22,7 +22,7 @@ export function renderDashboard(state) {
   document.getElementById("stat-value").textContent = money(state.finance.companyValue);
   document.getElementById("stat-cash").textContent = money(state.finance.cash);
   document.getElementById("stat-employees").textContent = String(headcount);
-  document.getElementById("stat-reputation").textContent = String(state.reputation);
+  document.getElementById("stat-reputation").innerHTML = `${state.reputation}<span>/100</span>`;
   document.getElementById("stat-revenue").textContent = money(state.finance.revenueThisMonth);
   document.getElementById("stat-expenses").textContent = money(state.finance.expensesThisMonth);
   document.getElementById("stat-payroll").textContent = money(payroll);
